@@ -21,5 +21,10 @@ jobs:
           paths:
             - ~/.cache/yarn
       - run:
+          name: lint
+          command: eslint src/**/*.ts
+      - run:
           name: test
-          command: yarn test
+          command: mocha tests/**/*.test.ts --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
+      - store_test_results:
+          path: reports
