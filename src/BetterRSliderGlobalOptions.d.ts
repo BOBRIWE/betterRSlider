@@ -1,3 +1,0 @@
-interface BetterRSliderGlobalOptions {
-    options: BetterRSliderOptions;
-}

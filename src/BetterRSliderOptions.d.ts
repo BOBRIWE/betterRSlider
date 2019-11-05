@@ -1,3 +1,0 @@
-interface BetterRSliderOptions {
-    value?: string;
-}

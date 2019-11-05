@@ -1,0 +1,3 @@
+interface IBetterRSliderListener {
+    onNotify(): void;
+}

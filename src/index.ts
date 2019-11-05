@@ -1,24 +1,28 @@
 import $ from 'jquery';
+import BetterRSliderView from './BetterRSliderView';
+import BetterRSlider from './BetterRSlider';
 
-$.fn.betterRSlider = Object.assign<BetterRSliderFunction, BetterRSliderGlobalOptions>(
-    function (this: JQuery, options: BetterRSliderOptions): JQuery {
+const defaultOptions: IBetterRSliderOptions = {
+    max: 100,
+    min: 0,
+    step: 1
+};
 
-        // Merge the global options with the options given as argument.
-        options = $.extend({}, $.fn.betterRSlider.options, options);
+$.fn.betterRSlider = function (this: JQuery, options: IBetterRSliderOptions): JQuery {
 
-        let extra = '';
-        if (options.value) {
-            extra += options.value;
-        }
-
-        $(this).html('Hello World!' + extra);
+    if (this.data('model')) {
+        const model: IBetterRSlider = this.data('model');
+        model.setOptions(options);
 
         return this;
-
-    },
-    {
-        options: {
-            value: null
-        }
     }
-);
+
+    const model = new BetterRSlider($.extend({}, defaultOptions, options));
+
+    const view = new BetterRSliderView(model, this);
+    model.addListener(view);
+
+    this.data('model', model);
+
+    return this;
+};

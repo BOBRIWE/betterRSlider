@@ -1,10 +1,11 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports =(env, argv) => {
     const isProduction = argv.mode === 'production';
 
     return {
-        entry: ['webpack/hot/dev-server', './src/index.ts'],
+        entry: ['webpack/hot/dev-server', './src/index.ts', './scss/index.scss'],
         mode: argv.mode,
         devtool: 'source-map',
         output: {
@@ -12,7 +13,7 @@ module.exports =(env, argv) => {
             libraryTarget: 'umd',
             libraryExport: 'default',
             filename: isProduction ? 'betterRSlider.min.js' : 'betterRSlider.js',
-            path: path.resolve(__dirname, 'dist')
+            path: path.resolve(__dirname, '/dist')
         },
         externals: {
             jquery: 'jQuery',
@@ -31,15 +32,29 @@ module.exports =(env, argv) => {
                     exclude: /node_modules/,
                     loader: 'ts-loader'
                 },
-            ],
+                {
+                    test: /\.scss$/,
+                    use: [
+                        isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                        'css-loader',
+                        'sass-loader',
+                    ],
+                }
+            ]
         },
+        plugins: [
+            new MiniCssExtractPlugin({
+                filename: '[name].css',
+                chunkFilename: '[id].css',
+                publicPath: 'dist'
+            }),
+        ],
         resolve: {
             extensions: ['.ts', '.js'],
         },
         devServer: {
-            contentBase: path.join(__dirname, 'dist'),
-            publicPath: '/dist/',
-            compress: true,
+            contentBase: path.join(__dirname, '/tests'),
+            publicPath: '/dist',
             hot: true,
             port: 3000
         }

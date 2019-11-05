@@ -1,0 +1,3 @@
+interface IBetterRSliderJQuery extends IBetterRSliderFunction, IBetterRSliderGlobalOptions{
+
+}

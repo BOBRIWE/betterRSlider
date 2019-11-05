@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Testing Page</title>
+<!--    <link type="text/css" rel="stylesheet" href="index.css">-->
     <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -10,12 +11,24 @@
 </head>
 <body>
 <div id="root"></div>
+<div id="root2"></div>
 
 
 <script src="../dist/betterRSlider.js"></script>
 
 <script>
-    $('#root').betterRSlider({value: ' It\'s Ali ve!'});
+    const root1 = $('#root');
+    const root2 = $('#root2');
+
+    let slide1 = 0;
+    setInterval(() => {
+        root1.betterRSlider({max: slide1+=0.1});
+    }, 10);
+
+    let slide2 = 0;
+    setInterval(() => {
+        root2.betterRSlider({max: slide2+=0.1});
+    }, 30);
 </script>
 </body>
 </html>
