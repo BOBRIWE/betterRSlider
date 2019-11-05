@@ -21,14 +21,29 @@
     const root2 = $('#root2');
 
     let slide1 = 0;
-    setInterval(() => {
-        root1.betterRSlider({max: slide1+=0.1});
-    }, 10);
-
     let slide2 = 0;
-    setInterval(() => {
-        root2.betterRSlider({max: slide2+=0.1});
-    }, 30);
+
+    try1(10);
+    function try1 (time){
+        requestAnimationFrame(() => {
+            root1.betterRSlider({max: slide1+=0.1});
+            setTimeout(() => {
+                try1(time)
+            }, time);
+        });
+    }
+
+
+    try2(30);
+    function try2 (time){
+        requestAnimationFrame(() => {
+            root2.betterRSlider({max: slide2+=0.1});
+            setTimeout(() => {
+                try2(time)
+            }, time);
+        });
+    }
+
 </script>
 </body>
 </html>

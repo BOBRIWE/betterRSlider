@@ -5,7 +5,7 @@ module.exports =(env, argv) => {
     const isProduction = argv.mode === 'production';
 
     return {
-        entry: ['webpack/hot/dev-server', './src/index.ts', './scss/index.scss'],
+        entry: ['./src/index.ts', './scss/index.scss'],
         mode: argv.mode,
         devtool: 'source-map',
         output: {
@@ -13,7 +13,7 @@ module.exports =(env, argv) => {
             libraryTarget: 'umd',
             libraryExport: 'default',
             filename: isProduction ? 'betterRSlider.min.js' : 'betterRSlider.js',
-            path: path.resolve(__dirname, '/dist')
+            path: path.resolve(__dirname, 'dist')
         },
         externals: {
             jquery: 'jQuery',
@@ -44,8 +44,7 @@ module.exports =(env, argv) => {
         },
         plugins: [
             new MiniCssExtractPlugin({
-                filename: '[name].css',
-                chunkFilename: '[id].css',
+                filename: 'index.css',
                 publicPath: 'dist'
             }),
         ],
@@ -55,7 +54,6 @@ module.exports =(env, argv) => {
         devServer: {
             contentBase: path.join(__dirname, '/tests'),
             publicPath: '/dist',
-            hot: true,
             port: 3000
         }
     }
