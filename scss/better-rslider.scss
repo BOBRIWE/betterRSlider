@@ -2,15 +2,15 @@
 
   &__container {
     width: 300px;
-    height: 50px;
+    height: 300px;
+    margin-bottom: 100px;
     background: burlywood;
 
     display: grid;
-    align-items: center;
     position: relative;
   }
 
-  &__point-left {
+  &__point-main {
     background: aquamarine;
     height: 60px;
     width: 60px;
@@ -19,11 +19,39 @@
     top: calc(50% - 30px);
     margin-left: -30px;
     opacity: 0.3;
+    z-index: 2;
+  }
+
+  &__point-second {
+    background: aquamarine;
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    position: absolute;
+    top: calc(50% - 30px);
+    margin-left: -30px;
+    opacity: 0.3;
+
+    z-index: 2;
+  }
+
+  &__point--vertical {
+    left: calc(50% - 30px);
+    margin-bottom: -30px;
+    margin-left: unset;
+    top: unset;
   }
 
   &__range-line {
     background: purple;
     height: 100%;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    &--vertical {
+      width: 100%;
+      bottom: 0;
+    }
   }
 
   &__line {
@@ -31,5 +59,14 @@
     height: 50%;
     border-radius: 10px;
     background: darkgrey;
+    align-self: center;
+    position: relative;
+
+    &--vertical {
+      width: 50%;
+      height: 100%;
+      align-self: unset;
+      justify-self: center;
+    }
   }
 }

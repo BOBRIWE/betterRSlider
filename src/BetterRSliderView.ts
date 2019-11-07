@@ -44,7 +44,7 @@ class BetterRSliderView implements IBetterRSliderListener{
 
             this._sliderLine.addClass('better-rslider__line');
             this._sliderContainer.addClass('better-rslider__container');
-            this._pointLeft.addClass('better-rslider__point-left');
+            this._pointLeft.addClass('better-rslider__point-main');
             this._rangeLine.addClass('better-rslider__range-line');
 
             this._pointLeft.appendTo(this._sliderLine);
@@ -58,25 +58,35 @@ class BetterRSliderView implements IBetterRSliderListener{
 
     private _render(): void {
         requestAnimationFrame(() => {
-            this._rangeLine.css(
-                'width',
-                ConvertationHelper.toPercents(
-                    this._model.options.min,
-                    this._model.options.max,
-                    this._model.options.value
-                ) + '%'
-            );
-            this._pointLeft.css(
-                'left',
-                ConvertationHelper.toPercents(
-                    this._model.options.min,
-                    this._model.options.max,
-                    this._model.options.value
-                ) + '%'
-            );
+            const offset = ConvertationHelper.toPercents(
+                this._model.options.min,
+                this._model.options.max,
+                this._model.options.value
+            ) + '%';
+
+            if (this._model.options.orientation === 'vertical') {
+                this._rangeLine.css('height', offset);
+                this._pointLeft.css('bottom',offset);
+                this._setVertical();
+            } else {
+                this._rangeLine.css('width', offset);
+                this._pointLeft.css('left',offset);
+                this._setHorizontal();
+            }
         });
     }
 
+    private _setVertical(): void {
+        this._sliderLine.addClass('better-rslider__line--vertical');
+        this._pointLeft.addClass('better-rslider__point--vertical');
+        this._rangeLine.addClass('better-rslider__range-line--vertical');
+    }
+
+    private _setHorizontal(): void {
+        this._sliderLine.removeClass('better-rslider__line--vertical');
+        this._pointLeft.removeClass('better-rslider__point--vertical');
+        this._rangeLine.removeClass('better-rslider__range-line--vertical');
+    }
 
     onNotify(): void {
         this._render();

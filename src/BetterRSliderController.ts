@@ -5,9 +5,10 @@ import BetterRSliderView from './BetterRSliderView';
 export default class BetterRSliderController {
     private _model: IBetterRSlider;
     private _view: BetterRSliderView;
-    private _startX: number;
+    private _startCoord: number;
     private _self: BetterRSliderController;
     private _curVal: number;
+    private _isVertical: boolean;
 
     constructor(model: IBetterRSlider, view: BetterRSliderView) {
         this._model = model;
@@ -17,21 +18,32 @@ export default class BetterRSliderController {
 
     private _mouseDownHandler(e: JQuery.Event): void {
         e.preventDefault();
-        this._startX = e.clientX;
+        this._isVertical = this._model.options.orientation === 'vertical';
+
+        this._startCoord = this._isVertical ? e.clientY : e.clientX;
+
         this._curVal = this._model.options.value;
-        $(document).on('mousemove', this._mouseMoveHandler.bind(this._self));
+        const moveHandler = this._isVertical ? this._mouseMoveVerticalHandler : this._mouseMoveHandler;
+        $(document).on('mousemove', moveHandler.bind(this._self));
         $(document).on('mouseup', this._mouseUpHandler);
     }
 
     private _mouseMoveHandler(e: JQuery.Event): void {
         const width = this._view.sliderLine.innerWidth();
-        const val = ( (this._model.options.max - this._model.options.min) / width);
-        this._model.setOptions({value: this._curVal + (e.clientX - this._startX) * val});
+        const val = (this._model.options.max - this._model.options.min) / width;
+        this._model.handleStep(this._curVal + (e.clientX - this._startCoord) * val);
+    }
+
+    private _mouseMoveVerticalHandler(e: JQuery.Event): void {
+        const height = this._view.sliderLine.innerHeight();
+        const val = ( (this._model.options.max - this._model.options.min) / height);
+        this._model.handleStep(-(-this._curVal + (e.clientY - this._startCoord) * val));
     }
 
     private _mouseUpHandler(): void {
+        const moveHandler = this._isVertical ? this._mouseMoveVerticalHandler : this._mouseMoveHandler;
         $(document).off('mouseup', this._mouseUpHandler);
-        $(document).off('mousemove', this._mouseMoveHandler);
+        $(document).off('mousemove', moveHandler);
     }
 
     bind(): void {

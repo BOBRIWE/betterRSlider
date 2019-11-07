@@ -1,25 +1,29 @@
-import $ from 'jquery';
 import IBetterRSlider from './IBetterRSlider';
 import IBetterRSliderOptions from './IBetterRSliderOptions';
 import IBetterRSliderListener from './IBetterRSliderListener';
 import OptionsHandler from './OptionsHandler';
 
-class BetterRSlider implements IBetterRSlider{
-    private _options: IBetterRSliderOptions;
+class BetterRSlider implements IBetterRSlider {
     private _listeners: IBetterRSliderListener[];
+    private _optionsHandler: OptionsHandler;
 
     constructor(options: IBetterRSliderOptions) {
         this._listeners = [];
-        this._options = options;
+        this._optionsHandler = new OptionsHandler();
+        this._optionsHandler.setOptions(options);
     }
 
     get options(): IBetterRSliderOptions {
-        return Object.assign({}, this._options);
+        return Object.assign({}, this._optionsHandler.options);
     }
 
     setOptions(options: IBetterRSliderOptions): void {
-        const exOptions = $.extend({}, this._options, options);
-        const optHandler = new OptionsHandler(exOptions);
+        this._optionsHandler.setOptions(options);
+        this.notify();
+    }
+
+    handleStep(newValue: number): void {
+        this._optionsHandler.handleStep(newValue);
         this.notify();
     }
 
@@ -38,11 +42,11 @@ class BetterRSlider implements IBetterRSlider{
             listener.onNotify();
         });
 
-        if (this._options.callback) {
-            this._options.callback();
+        const options = this._optionsHandler.options;
+        if (options.callback) {
+            options.callback();
         }
     }
-
 }
 
 export default BetterRSlider;

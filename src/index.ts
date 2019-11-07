@@ -9,7 +9,8 @@ const defaultOptions: IBetterRSliderOptions = {
     max: 100,
     min: 0,
     value: 0,
-    step: 1
+    step: 1,
+    orientation: 'horizontal'
 };
 
 $.fn.betterRSlider = function (this: JQuery, options: IBetterRSliderOptions | string): JQuery | number | string | boolean {
