@@ -6,7 +6,7 @@
   "author": "bobrovice <kirill.madze@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "mocha -r ts-node/register tests/**/*.test.ts",
+    "test": "jest tests/**/*.test.ts",
     "dev": "webpack --mode development",
     "prod": "webpack --mode production",
     "serve": "webpack-dev-server --hot --mode development"
@@ -15,18 +15,20 @@
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
+    "@babel/register": "^7.7.0",
     "@types/chai": "^4.2.4",
     "@types/jquery": "^3.3.31",
     "@types/mocha": "^5.2.7",
     "@typescript-eslint/eslint-plugin": "^2.6.0",
     "@typescript-eslint/parser": "^2.6.0",
     "babel-loader": "^8.0.6",
-    "chai": "^4.2.0",
+    "chai-spies": "^1.0.0",
     "css-loader": "^3.2.0",
     "eslint": "^6.6.0",
     "eslint-loader": "^3.0.2",
+    "jest": "^24.9.0",
+    "jest-junit": "^9.0.0",
     "mini-css-extract-plugin": "^0.8.0",
-    "mocha": "^6.2.2",
     "mocha-junit-reporter": "^1.23.1",
     "node-sass": "^4.13.0",
     "nyc": "^14.1.1",
@@ -39,7 +41,12 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
   },
+  "jest-junit": {
+    "outputDirectory": "./reports",
+    "outputName": "junit.xml"
+  },
   "dependencies": {
+    "@types/jest": "^24.0.22",
     "jquery": "^3.4.1"
   }
 }
