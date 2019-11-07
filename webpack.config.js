@@ -53,7 +53,7 @@ module.exports =(env, argv) => {
         },
         devServer: {
             contentBase: path.join(__dirname, '/tests'),
-            publicPath: '/dist',
+            publicPath: '/dist/',
             port: 3000
         }
     }

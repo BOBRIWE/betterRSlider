@@ -12,6 +12,8 @@
 <body>
 <div id="root"></div>
 <div id="root2"></div>
+<label for="input1"></label>
+<input id="input1" type="text">
 
 
 <script src="../dist/betterRSlider.js"></script>
@@ -19,30 +21,21 @@
 <script>
     const root1 = $('#root');
     const root2 = $('#root2');
+    root2.betterRSlider({max: 100000000});
+    root1.betterRSlider({
+        max: 100000000,
+        callback: () => {
+            let val = root1.betterRSlider('value');
+            console.log(val);
+            $('#input1').val(val);
+        }
+    });
 
-    let slide1 = 0;
-    let slide2 = 0;
-
-    try1(10);
-    function try1 (time){
-        requestAnimationFrame(() => {
-            root1.betterRSlider({max: slide1+=0.1});
-            setTimeout(() => {
-                try1(time)
-            }, time);
-        });
-    }
+    let val = root1.betterRSlider('value');
+    $('#input1').val(val);
 
 
-    try2(30);
-    function try2 (time){
-        requestAnimationFrame(() => {
-            root2.betterRSlider({max: slide2+=0.1});
-            setTimeout(() => {
-                try2(time)
-            }, time);
-        });
-    }
+
 
 </script>
 </body>

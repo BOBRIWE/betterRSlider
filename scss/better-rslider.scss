@@ -7,6 +7,23 @@
 
     display: grid;
     align-items: center;
+    position: relative;
+  }
+
+  &__point-left {
+    background: aquamarine;
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    position: absolute;
+    top: calc(50% - 30px);
+    margin-left: -30px;
+    opacity: 0.3;
+  }
+
+  &__range-line {
+    background: purple;
+    height: 100%;
   }
 
   &__line {
