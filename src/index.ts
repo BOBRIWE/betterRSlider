@@ -9,16 +9,19 @@ const defaultOptions: IBetterRSliderOptions = {
     max: 100,
     min: 0,
     value: 0,
+    valueSecond: 100,
     step: 1,
-    orientation: 'horizontal'
+    orientation: 'horizontal',
+    mainPointCaption: '<div></div>',
+    secondPointCaption: '<div></div>'
 };
 
-$.fn.betterRSlider = function (this: JQuery, options: IBetterRSliderOptions | string): JQuery | number | string | boolean {
+$.fn.betterRSlider = function (this: JQuery, options: IBetterRSliderOptions | string): JQuery | IBetterRSliderOptions {
 
     if (this.data('model')) {
         const model: IBetterRSlider = this.data('model');
-        if (options === 'value') {
-            return model.options.value;
+        if (options === 'options') {
+            return model.options;
         }
 
         model.setOptions(options as IBetterRSliderOptions);
@@ -31,6 +34,7 @@ $.fn.betterRSlider = function (this: JQuery, options: IBetterRSliderOptions | st
 
     view.onRendered(() => {
         controller.bind();
+        model.notify();
     });
 
     model.addListener(view);

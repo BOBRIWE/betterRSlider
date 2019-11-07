@@ -22,8 +22,8 @@ class BetterRSlider implements IBetterRSlider {
         this.notify();
     }
 
-    handleStep(newValue: number): void {
-        this._optionsHandler.handleStep(newValue);
+    handleStep(newValue: number, isSecond: boolean): void {
+        this._optionsHandler.handleStep(newValue, isSecond);
         this.notify();
     }
 
@@ -38,14 +38,14 @@ class BetterRSlider implements IBetterRSlider {
     }
 
     notify(): void {
-        this._listeners.forEach((listener) => {
-            listener.onNotify();
-        });
-
         const options = this._optionsHandler.options;
         if (options.callback) {
             options.callback();
         }
+
+        this._listeners.forEach((listener) => {
+            listener.onNotify();
+        });
     }
 }
 

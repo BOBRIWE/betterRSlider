@@ -8,42 +8,93 @@
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../dist/index.css">
 </head>
 <body>
-<div id="root"></div>
-<div id="root2"></div>
-<label for="input1"></label>
-<input id="input1" type="text">
-<label for="input2"></label>
-<input id="input2" type="text">
+
+<main class="main">
+    <div>
+        <div class="slider1"></div>
+        <label for="input1"></label>
+        <input id="input1" type="text">
+    </div>
+    <div>
+        <div class="slider2"></div>
+        <label for="input2"></label>
+        <input id="input2" type="text">
+    </div>
+
+    <div>
+        <div class="slider3"></div>
+        <label for="input3"></label>
+        <input id="input3" type="text">
+    </div>
+
+    <div>
+        <div class="slider4"></div>
+        <label for="input4"></label>
+        <input id="input4" type="text">
+    </div>
+</main>
+
+
+
+
 
 
 <script src="../dist/betterRSlider.js"></script>
 
 <script>
-    const root1 = $('#root');
-    const root2 = $('#root2');
-    root2.betterRSlider({
-        orientation: 'vertical',
-        callback: () => {
-            let val = root2.betterRSlider('value');
-            // console.log(val);
-            $('#input2').val(val);
-        }
-    });
+    const root1 = $('.slider1');
+    const root2 = $('.slider2');
     root1.betterRSlider({
         max: 10,
         step: 5,
+        value: 6,
         callback: () => {
-            let val = root1.betterRSlider('value');
-            // console.log(val);
-            $('#input1').val(val);
+
+            let options = root1.betterRSlider('options');
+            $('#input1').val(options.value);
         }
     });
 
-    let val = root1.betterRSlider('value');
-    $('#input1').val(val);
+    root2.betterRSlider({
+        orientation: 'vertical',
+        callback: () => {
+            let options = root2.betterRSlider('options');
+            $('#input2').val(options.value);
+        }
+    });
 
+    let $caption = $('<div></div>');
+    const root3 = $('.slider3');
+    root3.betterRSlider({
+        range: true,
+        valueSecond: 10,
+        min: 0,
+        max: 10,
+        step: 0.1,
+        mainPointCaption: $caption,
+        callback: () => {
+            let options = root3.betterRSlider('options');
+            $('#input3').val(`${options.value} - ${options.valueSecond}`);
+            $caption.html(options.value);
+        }
+    });
+
+    const root4 = $('.slider4');
+    root4.betterRSlider({
+        range: true,
+        valueSecond: 10,
+        min: 0,
+        max: 10,
+        step: 0.1,
+        orientation: 'vertical',
+        callback: () => {
+            let options = root4.betterRSlider('options');
+            $('#input4').val(`${options.value} - ${options.valueSecond}`);
+        }
+    });
 
 
 

@@ -4,7 +4,7 @@ import IBetterRSliderListener from './IBetterRSliderListener';
 
 export default interface IBetterRSlider extends IBetterRSliderGlobalOptions {
     setOptions(options: IBetterRSliderOptions): void;
-    handleStep(newValue: number): void;
+    handleStep(newValue: number, isSecond: boolean): void;
     addListener(listener: IBetterRSliderListener): void;
     notify(): void;
 }

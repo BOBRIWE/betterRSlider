@@ -2,42 +2,51 @@
 
   &__container {
     width: 300px;
-    height: 300px;
+    height: 50px;
     margin-bottom: 100px;
     background: burlywood;
 
     display: grid;
     position: relative;
+
+    &--vertical {
+      width: 50px;
+      height: 300px;
+    }
   }
 
   &__point-main {
     background: aquamarine;
-    height: 60px;
-    width: 60px;
-    border-radius: 30px;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
     position: absolute;
-    top: calc(50% - 30px);
-    margin-left: -30px;
-    opacity: 0.3;
-    z-index: 2;
+    top: calc(50% - 15px);
+    margin-left: -15px;
+    z-index: 3;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__point-second {
     background: aquamarine;
-    height: 60px;
-    width: 60px;
-    border-radius: 30px;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
     position: absolute;
-    top: calc(50% - 30px);
-    margin-left: -30px;
-    opacity: 0.3;
-
+    top: calc(50% - 15px);
+    margin-left: -15px;
     z-index: 2;
   }
 
   &__point--vertical {
-    left: calc(50% - 30px);
-    margin-bottom: -30px;
+    left: calc(50% - 15px);
+    margin-bottom: -15px;
     margin-left: unset;
     top: unset;
   }
