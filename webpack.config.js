@@ -1,18 +1,24 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports =(env, argv) => {
     const isProduction = argv.mode === 'production';
 
     return {
-        entry: ['./src/index.ts', './scss/index.scss'],
+        entry: {
+            betterRSlider: './src/index.ts',
+            index: './scss/index.scss',
+            'better-rslider': './scss/better-rslider.scss'
+        },
         mode: argv.mode,
         devtool: 'source-map',
         output: {
             library: 'betterRSlider',
             libraryTarget: 'umd',
             libraryExport: 'default',
-            filename: isProduction ? 'betterRSlider.min.js' : 'betterRSlider.js',
+            filename: isProduction ? '[name].min.js' : '[name].js',
             path: path.resolve(__dirname, 'dist')
         },
         externals: {
@@ -43,17 +49,20 @@ module.exports =(env, argv) => {
             ]
         },
         plugins: [
-            new MiniCssExtractPlugin({
-                filename: 'index.css',
-                publicPath: 'dist'
+            new HtmlWebpackPlugin({
+                template: 'public/index.html'
             }),
+            new FixStyleOnlyEntriesPlugin(),
+            new MiniCssExtractPlugin({
+                filename: '[name].css',
+                publicPath: 'dist'
+            })
         ],
         resolve: {
             extensions: ['.ts', '.js'],
         },
         devServer: {
-            contentBase: path.join(__dirname, '/tests'),
-            publicPath: '/dist/',
+            contentBase: path.join(__dirname, '/dist'),
             port: 3000
         }
     }

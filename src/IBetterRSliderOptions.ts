@@ -1,6 +1,5 @@
 export default interface IBetterRSliderOptions {
     step?: number;
-    vertical?: number;
     orientation?: string;
     range?: boolean;
     min?: number;

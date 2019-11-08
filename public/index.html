@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Better Range Slider</title>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <main class="main">
+        <div class="main__item">
+            <script>
+                $(document).ready(() => {
+
+                    const input1 = $('.input1');
+                    const orientation1 = $('.orientation1');
+                    const min1 = $('.min1');
+                    const max1 = $('.max1');
+                    const step1 = $('.step1');
+                    const val2 = $('.val1');
+                    const range1 = $('.range1');
+                    const slider1 = $('.slider1').betterRSlider({
+                        min: 1,
+                        max: 100,
+                        step: 1,
+                        value: 1,
+                        callback: () => {
+                            const opts = slider1.betterRSlider('options');
+                            input1.val(opts.value);
+                            orientation1.val(opts.orientation);
+                            max1.val(opts.max);
+                            min1.val(opts.min);
+                            step1.val(opts.step);
+                            val2.val(opts.valueSecond);
+                            range1.val(opts.range);
+                        }
+                    });
+
+                    input1.on('focusout', () => {
+                        slider1.betterRSlider({value: parseInt(input1.val())});
+                    });
+
+                    orientation1.on('focusout', () => {
+                       slider1.betterRSlider({orientation: orientation1.val()});
+                    });
+
+                    min1.on('focusout', () => {
+                       slider1.betterRSlider({min: parseFloat(min1.val())});
+                    });
+
+                    max1.on('focusout', () => {
+                       slider1.betterRSlider({max: parseFloat(max1.val())});
+                    });
+
+                    step1.on('focusout', () => {
+                       slider1.betterRSlider({step: parseFloat(step1.val())});
+                    });
+
+                    val2.on('focusout', () => {
+                       slider1.betterRSlider({valueSecond: parseFloat(val2.val())});
+                    });
+
+                    range1.on('focusout', () => {
+                       slider1.betterRSlider({range: range1.val() === 'true'});
+                    });
+
+
+
+                });
+            </script>
+            <div class="slider1"></div>
+            <input class="input1">
+            <div class="settings">
+                <label>min</label>
+                <input class="min1">
+                <label>max</label>
+                <input class="max1">
+                <label>step</label>
+                <input class="step1">
+                <label>range</label>
+                <input class="range1">
+                <label>orientation</label>
+                <input class="orientation1">
+                <label>val2</label>
+                <input class="val1">
+            </div>
+        </div>
+        <div class="main__item"></div>
+        <div class="main__item"></div>
+    </main>
+
+
+</body>
+</html>

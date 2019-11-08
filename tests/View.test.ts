@@ -12,7 +12,7 @@ describe('View', function () {
         $element.css('width', '700px');
         $element.css('height', '100px');
         $('body').append($element);
-        
+
         $element.betterRSlider();
 
         const point = $element.find('better-rslider__point-main');

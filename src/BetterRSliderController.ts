@@ -53,11 +53,9 @@ export default class BetterRSliderController {
             this._isSecond = false;
             this._mouseDownHandler.call(this._self, e);
         });
-        if (this._model.options.range) {
-            this._view.secondPoint.on('mousedown', (e: JQuery.Event) => {
-                this._isSecond = true;
-                this._mouseDownHandler.call(this._self, e);
-            });
-        }
+        this._view.secondPoint.on('mousedown', (e: JQuery.Event) => {
+            this._isSecond = true;
+            this._mouseDownHandler.call(this._self, e);
+        });
     }
 }

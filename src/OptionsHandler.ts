@@ -16,7 +16,16 @@ export default class OptionsHandler {
             this._possiblesSecond = this._getPossibleValuesArray(options.value, options.max, options.step, options.valueSecond);
         }
 
-        const roundedVal = parseFloat(newValue.toFixed(2));
+        let roundedVal: number;
+
+        if (options.step < 1) {
+            roundedVal = parseFloat(newValue.toFixed(2));
+        } else {
+            roundedVal = Math.round(newValue);
+        }
+
+        console.log(roundedVal);
+
         if (possibles.includes(roundedVal)) {
             if (isSecond) {
                 options.valueSecond = roundedVal;
@@ -59,12 +68,19 @@ export default class OptionsHandler {
     }
 
     setOptions(options: IBetterRSliderOptions): void {
-        if (!options.range) {
-            options.valueSecond = options.max;
+        const exOptions = $.extend({}, this._options, options);
+        if (!exOptions.range) {
+            exOptions.valueSecond = exOptions.max;
         }
 
-        const exOptions = $.extend({}, this._options, options);
-        this._checkConstraints(exOptions);
+
+        try {
+            this._checkConstraints(exOptions);
+        } catch (e) {
+            alert(e.message);
+            return;
+        }
+
         this._options = exOptions;
 
         if (exOptions.range) {
