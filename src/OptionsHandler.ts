@@ -9,7 +9,6 @@ export default class OptionsHandler {
 
     handleStep(newValue: number, isSecond: boolean): IBetterRSliderOptions {
         const options = this._options;
-
         const possibles = isSecond? this._possiblesSecond : this._possibles;
 
         if (this._options.range) {
@@ -17,11 +16,12 @@ export default class OptionsHandler {
             this._possiblesSecond = this._getPossibleValuesArray(options.value, options.max, options.step, options.valueSecond);
         }
 
-        if (possibles.includes(newValue)) {
+        const roundedVal = parseFloat(newValue.toFixed(2));
+        if (possibles.includes(roundedVal)) {
             if (isSecond) {
-                options.valueSecond = newValue;
+                options.valueSecond = roundedVal;
             } else {
-                options.value = newValue;
+                options.value = roundedVal;
             }
             return Object.assign({}, options);
         }
@@ -33,15 +33,13 @@ export default class OptionsHandler {
         const arr = [];
         let current = currentVal;
         while (current <= max) {
-            current = Math.round(current * 100000) / 100000;
-            arr.push(current);
+            arr.push(parseFloat(current.toFixed(2)));
             current+=step;
         }
 
         current = currentVal-step;
         while (current >= min) {
-            current = Math.round(current * 100000) / 100000;
-            arr.push(current);
+            arr.push(parseFloat(current.toFixed(2)));
             current-=step;
         }
 

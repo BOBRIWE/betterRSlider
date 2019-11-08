@@ -30,4 +30,6 @@ describe('OptionsHandler', function () {
             optionsHandler.setOptions({value: -1, valueSecond: -2})
         }).toThrowError();
     });
+
+
 });
