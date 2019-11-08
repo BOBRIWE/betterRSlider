@@ -3,6 +3,7 @@ import BetterRSliderView from './BetterRSliderView';
 import BetterRSlider from './BetterRSlider';
 import IBetterRSliderOptions from './IBetterRSliderOptions';
 import IBetterRSlider from './IBetterRSlider';
+import './IJQuery';
 import BetterRSliderController from './BetterRSliderController';
 
 const defaultOptions: IBetterRSliderOptions = {
@@ -16,7 +17,7 @@ const defaultOptions: IBetterRSliderOptions = {
     secondPointCaption: '<div></div>'
 };
 
-$.fn.betterRSlider = function (this: JQuery, options: IBetterRSliderOptions | string): JQuery | IBetterRSliderOptions {
+$.fn.betterRSlider = function (this: JQuery, options: IBetterRSliderOptions | string = {}): JQuery | IBetterRSliderOptions {
 
     if (this.data('model')) {
         const model: IBetterRSlider = this.data('model');
