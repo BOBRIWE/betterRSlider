@@ -1,30 +1,24 @@
 import IBetterRSliderOptions from './IBetterRSliderOptions';
 import $ from 'jquery';
+import {is} from '@babel/types';
 
 export default class OptionsHandler {
     private _options: IBetterRSliderOptions;
     private _possibles: number[];
     private _possiblesSecond: number[];
 
-
     handleStep(newValue: number, isSecond: boolean): IBetterRSliderOptions {
         const options = this._options;
-        const possibles = isSecond? this._possiblesSecond : this._possibles;
+        const possibles = isSecond ? this._possiblesSecond : this._possibles;
+        const offset = isSecond ? options.valueSecond % options.step : options.value % options.step;
 
         if (this._options.range) {
             this._possibles = this._getPossibleValuesArray(options.min, options.valueSecond, options.step, options.value);
             this._possiblesSecond = this._getPossibleValuesArray(options.value, options.max, options.step, options.valueSecond);
         }
 
-        let roundedVal: number;
-
-        if (options.step < 1) {
-            roundedVal = parseFloat(newValue.toFixed(2));
-        } else {
-            roundedVal = Math.round(newValue);
-        }
-
-        console.log(roundedVal);
+        let roundedVal = offset + Math.round(newValue / options.step) * options.step;
+        roundedVal = parseFloat(roundedVal.toFixed(2));
 
         if (possibles.includes(roundedVal)) {
             if (isSecond) {
@@ -73,6 +67,7 @@ export default class OptionsHandler {
         try {
             this._checkConstraints(exOptions);
         } catch (e) {
+            console.error(e.message);
             return;
         }
 

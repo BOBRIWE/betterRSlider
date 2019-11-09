@@ -52,7 +52,6 @@ module.exports =(env, argv) => {
             new HtmlWebpackPlugin({
                 template: 'public/index.html'
             }),
-            new FixStyleOnlyEntriesPlugin(),
             new MiniCssExtractPlugin({
                 filename: '[name].css',
                 publicPath: 'dist'

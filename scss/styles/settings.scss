@@ -1,0 +1,14 @@
+.settings {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  column-gap: 10px;
+  row-gap: 5px;
+
+  & > label {
+    width: fit-content;
+    display: grid;
+    justify-self: end;
+    align-self: center;
+    text-transform: uppercase;
+  }
+}
