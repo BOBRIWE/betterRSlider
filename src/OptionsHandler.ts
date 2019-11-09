@@ -1,6 +1,5 @@
 import IBetterRSliderOptions from './IBetterRSliderOptions';
 import $ from 'jquery';
-import {is} from '@babel/types';
 
 export default class OptionsHandler {
     private _options: IBetterRSliderOptions;

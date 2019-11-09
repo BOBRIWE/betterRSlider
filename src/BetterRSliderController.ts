@@ -49,7 +49,7 @@ export default class BetterRSliderController {
     }
 
     bind(): void {
-        this._view.leftPoint.on('mousedown', (e: JQuery.Event) => {
+        this._view.mainPoint.on('mousedown', (e: JQuery.Event) => {
             this._isSecond = false;
             this._mouseDownHandler.call(this._self, e);
         });

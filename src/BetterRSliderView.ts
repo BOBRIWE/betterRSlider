@@ -24,7 +24,7 @@ class BetterRSliderView implements IBetterRSliderListener{
         this._render();
     }
 
-    get leftPoint(): JQuery {
+    get mainPoint(): JQuery {
         return this._pointLeft;
     }
 

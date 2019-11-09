@@ -33,12 +33,14 @@ $.fn.betterRSlider = function (this: JQuery, options: IBetterRSliderOptions | st
     const view = new BetterRSliderView(model, this);
     const controller = new BetterRSliderController(model, view);
 
+    model.addListener(view);
+
     view.onRendered(() => {
         controller.bind();
         model.notify();
     });
 
-    model.addListener(view);
+
     this.data('model', model);
 
     return this;
