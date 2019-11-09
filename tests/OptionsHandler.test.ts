@@ -14,21 +14,17 @@ describe('OptionsHandler', function () {
     });
 
     it('should check constraints', function () {
-        expect(() => {
-            optionsHandler.setOptions({max: 10, value: 100})
-        }).toThrowError();
+        optionsHandler.setOptions({max: 10, value: 100});
+        expect(optionsHandler.options).toEqual(options);
 
-        expect(() => {
-            optionsHandler.setOptions({min: 10, value: -1})
-        }).toThrowError();
+        optionsHandler.setOptions({min: 10, value: -1});
+        expect(optionsHandler.options).toEqual(options);
 
-        expect(() => {
-            optionsHandler.setOptions({step: -1})
-        }).toThrowError();
+        optionsHandler.setOptions({step: -1});
+        expect(optionsHandler.options).toEqual(options);
 
-        expect(() => {
-            optionsHandler.setOptions({value: -1, valueSecond: -2})
-        }).toThrowError();
+        optionsHandler.setOptions({value: -1, valueSecond: -2});
+        expect(optionsHandler.options).toEqual(options);
     });
 
 

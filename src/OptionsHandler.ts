@@ -56,28 +56,23 @@ export default class OptionsHandler {
     }
 
     private _checkConstraints(options: IBetterRSliderOptions): void {
-        if (options.value > options.max || options.valueSecond > options.max) {
+        if (options.value > options.max || (options.range && options.valueSecond > options.max)) {
             throw new Error('Value should be <= max');
-        } else if (options.value < options.min || options.valueSecond < options.min) {
+        } else if (options.value < options.min || (options.range && options.valueSecond < options.min)) {
             throw new Error('Value should be >= min')
         } else if (options.step <= 0) {
             throw new Error('Step should be > 0');
-        } else if (options.value > options.valueSecond) {
+        } else if (options.range && (options.value > options.valueSecond)) {
             throw new Error('Second value should be >= first value');
         }
     }
 
     setOptions(options: IBetterRSliderOptions): void {
         const exOptions = $.extend({}, this._options, options);
-        if (!exOptions.range) {
-            exOptions.valueSecond = exOptions.max;
-        }
-
 
         try {
             this._checkConstraints(exOptions);
         } catch (e) {
-            alert(e.message);
             return;
         }
 

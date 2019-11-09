@@ -7,7 +7,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "test": "jest tests/**/*.test.ts",
+    "test": "jest tests/.*\\.test\\.ts$",
     "dev": "webpack --mode development",
     "prod": "webpack --mode production",
     "serve": "webpack-dev-server --hot --mode development"
