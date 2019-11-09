@@ -225,17 +225,20 @@
                     const min4 = $('.min4');
                     const max4 = $('.max4');
                     const step4 = $('.step4');
+                    const caption = $('<div></div>');
                     const slider4 = $('.slider4').betterRSlider({
                         min: -10,
                         max: 10,
                         step: 0.1,
                         orientation: 'vertical',
+                        mainPointCaption: caption,
                         callback: () => {
                             const opts = slider4.betterRSlider('options');
                             input4.val(opts.value);
                             max4.val(opts.max);
                             min4.val(opts.min);
                             step4.val(opts.step);
+                            caption.html(opts.value);
                         }
                     });
                 });
