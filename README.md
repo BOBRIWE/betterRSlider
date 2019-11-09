@@ -1,5 +1,6 @@
 # betterRSlider
 Range slider plugin for jQuery
+#### [Demonstration](https://bobriwe.github.io/betterRSlider/)
 
 ### UML diagram
 <h1 align="center">
