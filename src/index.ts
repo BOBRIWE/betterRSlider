@@ -40,6 +40,8 @@ $.fn.betterRSlider = function (this: JQuery, options: IBetterRSliderOptions | st
         model.notify();
     });
 
+    view.render();
+
 
     this.data('model', model);
 

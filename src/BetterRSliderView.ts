@@ -19,9 +19,6 @@ class BetterRSliderView implements IBetterRSliderListener{
         this._model = model;
         this._rootObject = rootObject;
         this._rendered = (): void => {};
-
-        this._renderBody();
-        this._render();
     }
 
     get mainPoint(): JQuery {
@@ -34,6 +31,11 @@ class BetterRSliderView implements IBetterRSliderListener{
 
     get sliderLine(): JQuery {
         return this._sliderLine;
+    }
+
+    render(): void {
+        this._renderBody();
+        this._render();
     }
 
     onRendered(callback: () => void): void {
@@ -81,6 +83,8 @@ class BetterRSliderView implements IBetterRSliderListener{
 
             if (this._model.options.range) {
                 this._secondPoint.appendTo(this._sliderLine);
+            }else {
+                this._secondPoint.detach();
             }
 
         });
@@ -100,13 +104,20 @@ class BetterRSliderView implements IBetterRSliderListener{
         );
 
         const height = this._model.options.range ? offsetSecond-offsetMain : offsetMain;
+
+        this._rangeLine.css('left', '');
         if (this._model.options.range) {
             this._rangeLine.css('bottom', offsetMain + '%');
+        }else {
+            this._rangeLine.css('bottom', '');
         }
 
         this._rangeLine.css('height', height + '%');
+        this._rangeLine.css('width', '');
         this._pointLeft.css('bottom',offsetMain + '%');
+        this._pointLeft.css('left','');
         this._secondPoint.css('bottom', offsetSecond + '%');
+        this._secondPoint.css('left', '');
         this._setVertical();
     }
 
@@ -124,13 +135,20 @@ class BetterRSliderView implements IBetterRSliderListener{
         );
 
         const width = this._model.options.range ? offsetSecond-offsetMain : offsetMain;
+
+        this._rangeLine.css('bottom', '');
         if (this._model.options.range) {
             this._rangeLine.css('left', offsetMain + '%');
+        }else {
+            this._rangeLine.css('left', '');
         }
 
         this._rangeLine.css('width',  width + '%');
+        this._rangeLine.css('height',  '');
         this._pointLeft.css('left',offsetMain + '%');
+        this._pointLeft.css('bottom','');
         this._secondPoint.css('left',offsetSecond + '%');
+        this._secondPoint.css('bottom','');
         this._setHorizontal();
     }
 
